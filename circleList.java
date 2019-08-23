@@ -1,15 +1,15 @@
+package org.sjbanerjee.ignite;
+
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
- 
-/**
- * @author Crunchify.com
- * 
- */
+
  
 public class Main {
  
-	private static Integer[] crunchifyArray;
+	private static Map<String, String>[] crunchifyArray;
 	final private int arraySize;
 	private static int first = 0;
 	private int last = 0;
@@ -19,23 +19,28 @@ public class Main {
 	public Main(int arraySize) {
 		super();
 		this.arraySize = arraySize;
-		Main.crunchifyArray = new Integer[arraySize];
+		Main.crunchifyArray =  (Map<String, String>[]) new Map[arraySize];
 	}
  
 	public static void main(String args[]) {
-		Main crunchifyObj = new Main(sizeForDemo);
- 
-		for (int i = 1; i <= 15; i++) {
-			int crunchifyInteger = ThreadLocalRandom.current().nextInt(1, 50);
-			log("Adding element: " + crunchifyInteger);
-			crunchifyObj.put(crunchifyInteger);
-		}
- 
-		log("\nHere is sorted ArrayList (last 10 elements): ");
-		Integer[] sortedArray = getSortedArrayList();
- 
-		for (int crunchifyArrayVal : sortedArray) {
-			log(crunchifyArrayVal + " ");
+		for (int j = 1; j <= 15; j++) {
+	
+			Main crunchifyObj = new Main(sizeForDemo);
+			System.out.println("Main: " + crunchifyObj);
+			for (int i = 1; i <= 15; i++) {
+				String userData = "{nmCli: jp} " + i;
+				log("Adding element: " + userData);
+				Map<String, String> usersDataMap = new HashMap<String, String>();
+				usersDataMap.put(String.valueOf(i) + " 03921-kds", userData);
+				crunchifyObj.put(usersDataMap);
+			}
+	 
+			log("\nHere is sorted ArrayList (last 10 elements): ");
+			Map<String, String>[] sortedArray = getSortedArrayList();
+	 
+			for (Map<String, String> crunchifyArrayVal : sortedArray) {
+				log(crunchifyArrayVal + " ");
+			}
 		}
 	}
  
@@ -51,7 +56,7 @@ public class Main {
 	}
  
 	// Put element into Circular ArrayList
-	public synchronized void put(int element) {
+	public synchronized void put(Map<String, String> element) {
 		crunchifyArray[last] = element;
 		if (length < arraySize) {
 			length++;
@@ -62,11 +67,11 @@ public class Main {
 	}
  
 	// Sort crunchifyArray
-	public static Integer[] getSortedArrayList() {
+	public static Map<String, String>[] getSortedArrayList() {
 		if (length == 0) {
 			return null;
 		}
-		Integer[] newArray = new Integer[length];
+		Map<String, String>[] newArray =  (Map<String, String>[]) new Map[length];
 		System.arraycopy(crunchifyArray, 0, newArray, 0, length);
 		//Arrays.sort(newArray);
 		return Arrays.copyOf(newArray, sizeForDemo);
